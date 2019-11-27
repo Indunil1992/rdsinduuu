@@ -8,7 +8,8 @@
         "type": "DIRECTORY",
         "isDirectory": true,
         "children": [
-          "99a11fc7-cdd3-45ec-a3c0-4c8e9bec72ca"
+          "99a11fc7-cdd3-45ec-a3c0-4c8e9bec72ca",
+          "a1ff26e7-76ef-4ed5-8821-e0f263ca5f98"
         ],
         "isRemovable": false,
         "filePath": "rdsinduuu"
@@ -22,7 +23,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "rdsinduuu/lambda.js",
-        "code": "exports.handler = function(event, context, callback) {\n    \n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "code": "let SL_AWS = require('slappforge-sdk-aws');\nlet connectionManager = require('./ConnectionManager');\nconst rds = new SL_AWS.RDS(connectionManager);\n\nexports.handler = function (event, context, callback) {\n\n    // You can pass the existing connection to this function.\n    // A new connection will be created if it's not present as the third param \n    // You must always end/destroy the DB connection after it's used\n    rds.query({\n        instanceIdentifier: 'ooo',\n        query: 'name, age',\n        inserts: [\"indunil1\", 27]\n    }, function (error, results, connection) {\n        if (error) {\n            console.log(\"Error occurred\");\n            throw error;\n        } else {\n            console.log(\"Success\")\n            console.log(results);\n        }\n\n        connection.end();\n    });\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -36,6 +37,17 @@
             "config": {}
           }
         ]
+      },
+      "a1ff26e7-76ef-4ed5-8821-e0f263ca5f98": {
+        "id": "a1ff26e7-76ef-4ed5-8821-e0f263ca5f98",
+        "parent": "627e17cd-3c3a-405b-89b7-0955edcc75f4",
+        "name": "ConnectionManager.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "rdsinduuu/ConnectionManager.js",
+        "code": "module.exports = function() {\n    this.dbConnections = [];\n\n    this.dbConnections[\"ooo\"] = {\n        host: process.env.EndPoint_rdsOoo,\n        port: process.env.Port_rdsOoo,\n        user: process.env.User_rdsOoo,\n        password: process.env.Password_rdsOoo,\n        database: \"ooooo\"\n    };\n};"
       }
     },
     "rootNode": "627e17cd-3c3a-405b-89b7-0955edcc75f4",
@@ -70,6 +82,48 @@
           "stageDeploymentId": "86y0yr",
           "mode": 1
         }
+      },
+      "rds-ooo": {
+        "name": "rds-ooo",
+        "type": "RDS",
+        "config": {
+          "editMode": false,
+          "operation": 0,
+          "rdsInstance": {
+            "rdsEngineType": "mysql",
+            "rdsEdition": "",
+            "rdsInstanceSpec": {
+              "dbInstanceClass": "db.t2.micro",
+              "dbLicenseModel": "general-public-license",
+              "dbEngineVersion": "5.7.19"
+            },
+            "rdsSetting": {
+              "instanceIdentifier": "ooo",
+              "masterUsername": "oooo",
+              "masterPassword": "oooooooooo"
+            },
+            "rdsDBOptions": {
+              "dbName": "ooooo",
+              "dbPort": "3306"
+            },
+            "rdsInstanceArn": "",
+            "Host": "",
+            "doesExist": false,
+            "initializationQuery": "090",
+            "alreadyDeployed": false
+          },
+          "rdsInstanceResources": [],
+          "projectRegion": "us-east-1",
+          "mode": 0,
+          "additionalFiles": [],
+          "params": {
+            "query": "name, age",
+            "inserts": "\"indunil1\",27"
+          },
+          "isGlobalEditMode": false,
+          "enableInject": true,
+          "isNewFromGlobal": false
+        }
       }
     },
     "customTemplate": {
@@ -87,7 +141,15 @@
       }
     ],
     "packageJSON": {
-      "dependencies": {}
+      "dependencies": {
+        "slappforge-sdk-aws": {
+          "name": "slappforge-sdk-aws",
+          "language": "javascript",
+          "version": "0.0.5",
+          "dev": false,
+          "notRemovable": false
+        }
+      }
     }
   },
   "PROJECT_META": {
@@ -97,7 +159,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1574836042901
+    "lastSave": 1574836339407
   },
   "VCS_STATE": {
     "provider": "GitHub",
