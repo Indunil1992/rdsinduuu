@@ -1,0 +1,109 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "627e17cd-3c3a-405b-89b7-0955edcc75f4": {
+        "id": "627e17cd-3c3a-405b-89b7-0955edcc75f4",
+        "parent": null,
+        "name": "rdsinduuu",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "99a11fc7-cdd3-45ec-a3c0-4c8e9bec72ca"
+        ],
+        "isRemovable": false,
+        "filePath": "rdsinduuu"
+      },
+      "99a11fc7-cdd3-45ec-a3c0-4c8e9bec72ca": {
+        "id": "99a11fc7-cdd3-45ec-a3c0-4c8e9bec72ca",
+        "parent": "627e17cd-3c3a-405b-89b7-0955edcc75f4",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "rdsinduuu/lambda.js",
+        "code": "exports.handler = function(event, context, callback) {\n    \n    callback(null, {\"message\": \"Successfully executed\"});\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "apigusEast1sachithraAPInamehiruidneepost",
+            "config": {}
+          }
+        ]
+      }
+    },
+    "rootNode": "627e17cd-3c3a-405b-89b7-0955edcc75f4",
+    "openFiles": [
+      "99a11fc7-cdd3-45ec-a3c0-4c8e9bec72ca"
+    ],
+    "currentFileId": "99a11fc7-cdd3-45ec-a3c0-4c8e9bec72ca",
+    "resources": {
+      "apigusEast1sachithraAPInamehiruidneepost": {
+        "name": "apigusEast1sachithraAPInamehiruidneepost",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 1,
+          "apiName": "sachithraAPIname",
+          "apiId": "052p9kjn18",
+          "endpointType": "REGIONAL",
+          "rootResourceId": "zrjp6rdv3b",
+          "existingResources": {
+            "/hiruidnee": "mdiuqa",
+            "/": "zrjp6rdv3b"
+          },
+          "resourceMode": 1,
+          "resourcePath": "/hiruidnee",
+          "resourceName": "hiruidnee",
+          "resourceId": "mdiuqa",
+          "restMethod": "POST",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 1,
+          "stageName": "Test",
+          "stageDeploymentId": "86y0yr",
+          "mode": 1
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": null
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "rdsinduuu",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1574836042901
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "rdsinduuu",
+      "url": "https://github.com/Indunil1992/rdsinduuu"
+    }
+  }
+}
