@@ -23,7 +23,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "rdsinduuu/lambda.js",
-        "code": "let SL_AWS = require('slappforge-sdk-aws');\nlet connectionManager = require('./ConnectionManager');\nconst rds = new SL_AWS.RDS(connectionManager);\n\nexports.handler = function (event, context, callback) {\n\n    // You can pass the existing connection to this function.\n    // A new connection will be created if it's not present as the third param \n    // You must always end/destroy the DB connection after it's used\n    rds.query({\n        instanceIdentifier: 'ooo',\n        query: 'name, age',\n        inserts: [\"indunil1\", 27]\n    }, function (error, results, connection) {\n        if (error) {\n            console.log(\"Error occurred\");\n            throw error;\n        } else {\n            console.log(\"Success\")\n            console.log(results);\n        }\n\n        connection.end();\n    });\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "code": "let SL_AWS = require('slappforge-sdk-aws');\nlet connectionManager = require('./ConnectionManager');\nconst rds = new SL_AWS.RDS(connectionManager);\n\nexports.handler = function (event, context, callback) {\n\n    // You must always end/destroy the DB connection after it's used\n    rds.beginTransaction({\n        instanceIdentifier: 'test1'\n    }, function (error, connection) {\n        if (error) {\n            throw error;\n        }\n    });\n\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -47,7 +47,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "rdsinduuu/ConnectionManager.js",
-        "code": "module.exports = function() {\n    this.dbConnections = [];\n\n    this.dbConnections[\"ooo\"] = {\n        host: process.env.EndPoint_rdsOoo,\n        port: process.env.Port_rdsOoo,\n        user: process.env.User_rdsOoo,\n        password: process.env.Password_rdsOoo,\n        database: \"ooooo\"\n    };\n};"
+        "code": "module.exports = function() {\n    this.dbConnections = [];\n\n    this.dbConnections[\"test1\"] = {\n        host: process.env.EndPoint_rdsTest1,\n        port: process.env.Port_rdsTest1,\n        user: process.env.User_rdsTest1,\n        password: process.env.Password_rdsTest1,\n        database: \"test1sss\"\n    };\n};"
       }
     },
     "rootNode": "627e17cd-3c3a-405b-89b7-0955edcc75f4",
@@ -83,12 +83,12 @@
           "mode": 1
         }
       },
-      "rds-ooo": {
-        "name": "rds-ooo",
+      "rds-test1": {
+        "name": "rds-test1",
         "type": "RDS",
         "config": {
           "editMode": false,
-          "operation": 0,
+          "operation": 1,
           "rdsInstance": {
             "rdsEngineType": "mysql",
             "rdsEdition": "",
@@ -98,18 +98,18 @@
               "dbEngineVersion": "5.7.19"
             },
             "rdsSetting": {
-              "instanceIdentifier": "ooo",
-              "masterUsername": "oooo",
-              "masterPassword": "oooooooooo"
+              "instanceIdentifier": "test1",
+              "masterUsername": "test1",
+              "masterPassword": "test1test1"
             },
             "rdsDBOptions": {
-              "dbName": "ooooo",
+              "dbName": "test1sss",
               "dbPort": "3306"
             },
             "rdsInstanceArn": "",
             "Host": "",
             "doesExist": false,
-            "initializationQuery": "090",
+            "initializationQuery": "",
             "alreadyDeployed": false
           },
           "rdsInstanceResources": [],
@@ -117,8 +117,8 @@
           "mode": 0,
           "additionalFiles": [],
           "params": {
-            "query": "name, age",
-            "inserts": "\"indunil1\",27"
+            "query": "",
+            "inserts": ""
           },
           "isGlobalEditMode": false,
           "enableInject": true,
@@ -159,7 +159,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1574836339407
+    "lastSave": 1574837091031
   },
   "VCS_STATE": {
     "provider": "GitHub",
